@@ -144,6 +144,7 @@ public class AuthController {
 
         User user = userOpt.get();
         String otp = OtpGenerator.generateOtp();
+        System.out.println("Generated OTP = " + otp);
 
         user.setOtp(otp);
         user.setOtpExpiry(Instant.now().plus(10, ChronoUnit.MINUTES));
@@ -152,9 +153,8 @@ public class AuthController {
         boolean sent = emailService.sendOtpEmail(
                 user.getEmail(),
                 "Your Password Reset OTP",
-                "Your OTP is: " + otp + "\nValid for 10 minutes."
+                otp
         );
-
         System.out.println("📧 OTP Email Sent? " + sent);
 
         if (!sent) {
