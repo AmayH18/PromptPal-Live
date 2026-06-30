@@ -1,0 +1,34 @@
+# Node
+node_modules/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Java
+Backend/target/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# IntelliJ
+.idea/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven wrapper cache
+.mvn/wrapper/maven-wrapper.jar
