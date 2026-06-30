@@ -202,7 +202,7 @@ export default function DashboardPage() {
               </div>
               <button
                 onClick={() => navigate("/choose-advice")}
-                className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5"
                 style={{ background: "linear-gradient(135deg, #0ea5e9, #8b5cf6)", boxShadow: "0 8px 24px rgba(139,92,246,0.3)" }}
               >
                 🎯 Advice Hub

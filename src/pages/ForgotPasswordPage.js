@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-x-hidden">
       <video
         autoPlay
         loop
@@ -54,8 +54,8 @@ export default function ForgotPasswordPage() {
       </video>
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/55 via-slate-900/45 to-rose-900/55" />
 
-      <div className="relative z-10 mx-auto w-full max-w-md px-4 py-12">
-        <div className="rounded-2xl border border-white/30 bg-white/15 p-8 shadow-2xl backdrop-blur-xl">
+      <div className="relative z-10 mx-auto w-full max-w-[32rem] px-4 py-8 sm:px-6 sm:py-12">
+        <div className="rounded-[1.6rem] border border-white/30 bg-white/15 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
           <div className="mb-6 flex flex-col items-center text-center">
             <img
               src="https://amayh18.github.io/Portfolio/profile_pic/promptpal_logo.png"
@@ -82,9 +82,9 @@ export default function ForgotPasswordPage() {
           {/* --- STEP 1: ENTER EMAIL --- */}
           {step === 1 && (
             <form onSubmit={handleSendOtp} className="space-y-4">
-              <label className="font-medium text-white">Email Address</label>
+              <label className="text-sm font-semibold text-white">Email Address</label>
               <input
-                className="w-full rounded-lg border border-white/40 bg-white/90 p-3 text-slate-900 focus:ring-2 focus:ring-cyan-500"
+                className="h-12 w-full rounded-[0.95rem] border border-white/40 bg-white/90 px-4 text-sm text-slate-900 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500"
                 type="email"
                 placeholder="Enter your registered email"
                 value={email}
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 font-semibold text-white transition-all hover:from-cyan-600 hover:to-blue-700"
+                className="h-12 w-full rounded-[0.95rem] bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:from-cyan-600 hover:to-blue-700"
               >
                 Send Verification Code
               </button>
@@ -104,9 +104,9 @@ export default function ForgotPasswordPage() {
           {/* --- STEP 2: ENTER OTP + NEW PASSWORD --- */}
           {step === 2 && (
             <form onSubmit={handleResetPassword} className="space-y-4">
-              <label className="font-medium text-white">Enter OTP</label>
+              <label className="text-sm font-semibold text-white">Enter OTP</label>
               <input
-                className="w-full rounded-lg border border-white/40 bg-white/90 p-3 text-slate-900 focus:ring-2 focus:ring-cyan-500"
+                className="h-12 w-full rounded-[0.95rem] border border-white/40 bg-white/90 px-4 text-sm text-slate-900 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500"
                 type="text"
                 placeholder="Enter the 6-digit OTP"
                 value={otp}
@@ -114,9 +114,9 @@ export default function ForgotPasswordPage() {
                 required
               />
 
-              <label className="font-medium text-white">New Password</label>
+              <label className="text-sm font-semibold text-white">New Password</label>
               <input
-                className="w-full rounded-lg border border-white/40 bg-white/90 p-3 text-slate-900 focus:ring-2 focus:ring-cyan-500"
+                className="h-12 w-full rounded-[0.95rem] border border-white/40 bg-white/90 px-4 text-sm text-slate-900 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500"
                 type="password"
                 placeholder="Enter your new password"
                 value={newPassword}
@@ -126,7 +126,7 @@ export default function ForgotPasswordPage() {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2 font-semibold text-white transition-all hover:from-emerald-600 hover:to-teal-700"
+                className="h-12 w-full rounded-[0.95rem] bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:from-emerald-600 hover:to-teal-700"
               >
                 Reset Password
               </button>

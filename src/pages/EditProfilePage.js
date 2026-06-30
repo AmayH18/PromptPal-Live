@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
 
-const inputCls = "w-full rounded-xl border border-white/35 bg-white/95 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-cyan-400";
-const labelCls = "block mb-1.5 text-xs font-semibold text-slate-400 uppercase tracking-wider";
-const selectCls = "w-full rounded-xl border border-white/35 bg-white/95 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-400";
+const inputCls = "w-full rounded-[0.95rem] border border-white/35 bg-white/95 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-cyan-400";
+const labelCls = "mb-1.5 block text-xs font-semibold uppercase tracking-[0.16em] text-slate-400";
+const selectCls = "w-full rounded-[0.95rem] border border-white/35 bg-white/95 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-400";
 const HAIR_CONCERN_OPTIONS = [
   "HAIR_FALL",
   "HAIR_THINNING",
@@ -106,7 +106,7 @@ function parseAllergies(value) {
 
 function Section({ title, icon, children }) {
   return (
-    <div className="rounded-2xl border border-white/10 p-5 backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.04)" }}>
+    <div className="rounded-[1.25rem] border border-white/10 p-4 backdrop-blur-sm sm:p-5" style={{ background: "rgba(255,255,255,0.04)" }}>
       <h3 style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: 13, color: "rgba(148,163,184,0.8)", textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
         {icon} {title}
       </h3>
@@ -265,11 +265,11 @@ await API.put(
         <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full blur-3xl" style={{ background: "rgba(56,189,248,0.06)" }} />
         <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full blur-3xl" style={{ background: "rgba(139,92,246,0.06)" }} />
 
-        <div className="relative z-10 min-h-screen px-4 py-8 sm:px-8 sm:py-12">
+        <div className="relative z-10 min-h-screen px-4 py-6 sm:px-8 sm:py-10">
           <div className="mx-auto max-w-3xl">
 
             {/* ── Header ── */}
-            <div className="fade-up flex items-center justify-between mb-8">
+            <div className="fade-up mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h1 style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 800, fontSize: 28, color: "white", letterSpacing: "-0.02em" }}>
                   Edit Profile
@@ -280,7 +280,7 @@ await API.put(
               </div>
               <button
                 onClick={() => navigate("/profile")}
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/10"
+                className="rounded-full border border-white/15 bg-white/5 px-3 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/10 sm:px-4"
               >
                 ← Back
               </button>
@@ -490,9 +490,21 @@ await API.put(
                         className={inputCls}
                         type="number"
                         min="1"
-                        max="24"
+                        max="16"
                         value={sleepHours}
-                        onChange={(e) => setSleepHours(Number(e.target.value))}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (value === "") {
+                            setSleepHours("");
+                            return;
+                          }
+                          const nextValue = Number(value);
+                          if (Number.isNaN(nextValue)) {
+                            setSleepHours("");
+                            return;
+                          }
+                          setSleepHours(Math.min(16, Math.max(1, nextValue)));
+                        }}
                         required
                       />
                     </div>
@@ -591,7 +603,7 @@ await API.put(
                 <button
                   type="submit"
                   disabled={saving}
-                  className="w-full rounded-2xl py-4 text-base font-bold text-white transition hover:-translate-y-0.5 disabled:opacity-60"
+                  className="w-full rounded-[1rem] py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 disabled:opacity-60 sm:py-4 sm:text-base"
                   style={{ background: "linear-gradient(135deg, #0ea5e9, #8b5cf6)", boxShadow: "0 8px 28px rgba(139,92,246,0.35)" }}
                 >
                   {saving ? "⏳ Saving..." : "💾 Save Profile"}

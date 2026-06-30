@@ -609,7 +609,7 @@ export default function PromptPalResultPage() {
         .shimmer { animation: shimmer 2.5s ease-in-out infinite; }
       `}</style>
 
-      <div className="page-font relative min-h-screen overflow-hidden">
+      <div className="page-font relative min-h-screen overflow-x-hidden">
         {/* BG Video */}
         <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover opacity-40">
           <source src="/background.mp4" type="video/mp4" />
@@ -620,7 +620,7 @@ export default function PromptPalResultPage() {
         <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-cyan-500/8 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-rose-500/8 blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 min-h-screen px-4 py-10 sm:px-6 sm:py-14">
+        <div className="relative z-10 min-h-screen px-4 py-6 sm:px-6 sm:py-10">
           <div className="mx-auto max-w-5xl space-y-8">
 
             <div className="fade-up flex justify-start" style={{ animationDelay: "0.01s" }}>
@@ -634,7 +634,7 @@ export default function PromptPalResultPage() {
 
             {/* ── HERO HEADER ── */}
             <div
-              className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-10 backdrop-blur-md overflow-hidden relative"
+              className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-md sm:p-8"
               style={{ animation: "fadeSlideUp 0.5s ease both" }}
             >
               {/* Decorative line top */}
@@ -642,7 +642,7 @@ export default function PromptPalResultPage() {
 
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
                 <div className="flex-1">
-                  <p className={`mb-3 inline-flex rounded-full px-4 py-1 text-xs font-semibold tracking-wider text-white ${meta.badgeClass}`}>
+                  <p className={`mb-3 inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-white ${meta.badgeClass}`}>
                     {meta.badge}
                   </p>
                   <h1 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
@@ -654,7 +654,7 @@ export default function PromptPalResultPage() {
 
                   {/* Quick stats */}
                   <div className="mt-5 flex flex-wrap gap-3">
-                    <div className="flex items-center gap-2 rounded-3xl border border-white/15 bg-white/8 px-4 py-2.5 text-sm text-white/80">
+                    <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-2 text-sm text-white/80">
                       <span>📅</span>
                       <span className="font-semibold text-white">21-Day Personalized Journey</span>
                     </div>
@@ -664,7 +664,7 @@ export default function PromptPalResultPage() {
                 <div className="flex flex-col items-center gap-3">
                   <button
                     onClick={copyAdvice}
-                    className="rounded-3xl border border-white/20 bg-white/8 px-6 py-2.5 text-sm font-semibold text-white/80 transition hover:bg-white/15 hover:text-white"
+                    className="rounded-full border border-white/20 bg-white/8 px-4 py-2.5 text-sm font-semibold text-white/80 transition hover:bg-white/15 hover:text-white"
                   >
                     {copied ? "✓ Copied!" : "Copy Wellness Plan"}
                   </button>
@@ -712,7 +712,7 @@ export default function PromptPalResultPage() {
             <div className="flex flex-wrap justify-center gap-3 pb-4" style={{ animation: "fadeSlideUp 0.6s ease 0.4s both" }}>
               <button
                 onClick={() => navigate("/promptpal")}
-                className="rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-bold text-white shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 hover:shadow-cyan-500/40 hover:-translate-y-0.5"
+                className="rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 hover:shadow-cyan-500/40 hover:-translate-y-0.5"
               >
                 ↺ Generate Again
               </button>
@@ -726,19 +726,19 @@ export default function PromptPalResultPage() {
                     },
                   })
                 }
-                className="rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-600 px-7 py-3 font-bold text-white shadow-lg shadow-violet-500/20 transition hover:from-violet-400 hover:to-fuchsia-500 hover:-translate-y-0.5"
+                className="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-violet-500/20 transition hover:from-violet-400 hover:to-fuchsia-500 hover:-translate-y-0.5"
               >
                 🎯 Advice Hub
               </button>
               <button
                 onClick={() => navigate("/dashboard")}
-                className="rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-7 py-3 font-bold text-white shadow-lg shadow-emerald-500/20 transition hover:from-emerald-400 hover:to-teal-500 hover:-translate-y-0.5"
+                className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:from-emerald-400 hover:to-teal-500 hover:-translate-y-0.5"
               >
                 📊 Dashboard
               </button>
               <button
                 onClick={() => navigate("/profile")}
-                className="rounded-2xl border border-white/20 bg-white/8 px-7 py-3 font-semibold text-white/70 transition hover:bg-white/15 hover:text-white"
+                className="rounded-full border border-white/20 bg-white/8 px-5 py-2.5 text-sm font-semibold text-white/70 transition hover:bg-white/15 hover:text-white"
               >
                 👤 Profile
               </button>

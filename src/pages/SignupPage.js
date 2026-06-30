@@ -25,7 +25,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="relative min-h-screen overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');`}</style>
 
       {/* Background video */}
@@ -44,8 +44,8 @@ export default function SignupPage() {
       <div className="absolute -top-32 -right-32 h-80 w-80 rounded-full blur-3xl" style={{ background: 'rgba(200,191,255,0.18)' }} />
       <div className="absolute -bottom-24 -left-16 h-96 w-96 rounded-full blur-3xl" style={{ background: 'rgba(129,140,248,0.20)' }} />
 
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-12">
-        <div className="mx-auto w-full max-w-[1100px] grid items-center gap-12 lg:grid-cols-2">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-8 sm:px-6 sm:py-12">
+        <div className="mx-auto grid w-full max-w-[1100px] items-center gap-8 lg:grid-cols-2 lg:gap-12">
 
           {/* Left: Brand copy */}
           <section className="hidden lg:flex flex-col text-white">
@@ -109,7 +109,7 @@ export default function SignupPage() {
           {/* Right: Signup card */}
           <section className="w-full">
             <div
-              className="rounded-[24px] overflow-hidden shadow-2xl"
+              className="overflow-hidden rounded-[1.5rem] border border-white/70 shadow-[0_24px_70px_rgba(17,24,39,0.16)]"
               style={{
                 background: 'rgba(255,255,255,0.92)',
                 backdropFilter: 'blur(24px)',
@@ -121,7 +121,7 @@ export default function SignupPage() {
               {/* Card top band */}
               <div className="h-2 w-full" style={{ background: 'linear-gradient(90deg, #5a3be7, #818cf8, #4112d0)' }} />
 
-              <div className="px-8 py-8">
+              <div className="px-6 py-6 sm:px-8 sm:py-8">
                 {/* Logo on mobile */}
                 <div className="flex items-center gap-2.5 mb-6 lg:hidden">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/20 bg-gradient-to-br from-[#4112d0] via-[#5a3be7] to-[#818cf8] p-[2px] shadow-[0_10px_24px_rgba(90,59,231,0.28)]">
@@ -146,7 +146,7 @@ export default function SignupPage() {
                   Start your personalized wellness experience today.
                 </p>
 
-                <form onSubmit={handleSignup} className="mt-6 space-y-4">
+                <form onSubmit={handleSignup} className="mt-6 space-y-4 sm:space-y-4">
                   <div>
                     <label
                       className="block mb-1.5 uppercase tracking-wider text-[#787587]"
@@ -220,7 +220,7 @@ export default function SignupPage() {
                   </div>
 
                   <button
-                    className="w-full h-12 rounded-full font-semibold text-white transition-all hover:opacity-90 active:scale-[0.98]"
+                    className="w-full min-h-[3rem] rounded-[0.95rem] px-4 py-3 text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-[0.98]"
                     style={{ background: 'linear-gradient(135deg, #5a3be7, #4112d0)', fontSize: 15, boxShadow: '0 4px 16px rgba(90,59,231,0.35)' }}
                     type="submit"
                   >

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Zap, Menu, X } from 'lucide-react';
+import { ArrowRight, Check, Zap, Menu, X, Brain, TrendingUp, UtensilsCrossed, Dumbbell, BellRing, BarChart3 } from 'lucide-react';
 
 // Navbar Component
 function Navbar() {
@@ -46,14 +46,14 @@ function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#features" className="text-sm font-medium text-[#474555] transition hover:text-[#4112d0]">
+        <nav className="hidden md:flex items-center gap-2 rounded-full border border-[#e9e5ff] bg-white/70 px-2 py-2 shadow-[0_8px_30px_rgba(90,59,231,0.06)] backdrop-blur-sm">
+          <a href="#features" className="rounded-full px-4 py-2 text-sm font-medium text-[#474555] transition hover:bg-[#f1ecfa] hover:text-[#4112d0]">
             Features
           </a>
-          <a href="#why" className="text-sm font-medium text-[#474555] transition hover:text-[#4112d0]">
+          <a href="#why" className="rounded-full px-4 py-2 text-sm font-medium text-[#474555] transition hover:bg-[#f1ecfa] hover:text-[#4112d0]">
             Why Promptpal
           </a>
-          <a href="#how" className="text-sm font-medium text-[#474555] transition hover:text-[#4112d0]">
+          <a href="#how" className="rounded-full px-4 py-2 text-sm font-medium text-[#474555] transition hover:bg-[#f1ecfa] hover:text-[#4112d0]">
             How It Works
           </a>
         </nav>
@@ -68,7 +68,7 @@ function Navbar() {
           </Link>
           <Link
             to="/signup"
-            className="rounded-full bg-gradient-to-r from-[#4112d0] to-[#5a3be7] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:shadow-[0_8px_20px_rgba(90,59,231,0.35)] hover:scale-105"
+            className="rounded-full bg-gradient-to-r from-[#4112d0] to-[#5a3be7] px-5 py-2 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(90,59,231,0.25)] transition hover:shadow-[0_14px_32px_rgba(90,59,231,0.35)] hover:scale-[1.03]"
           >
             Sign Up
           </Link>
@@ -126,8 +126,8 @@ function HeroSection() {
         <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full blur-3xl bg-gradient-to-l from-[#818cf8]/20 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-20">
-        <div className="flex flex-col items-center text-center space-y-12">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-20 lg:py-24">
+        <div className="flex flex-col items-center text-center space-y-10 md:space-y-12">
           {/* Logo Center */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -151,7 +151,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-3xl space-y-8"
+            className="max-w-3xl space-y-8 rounded-[2rem] border border-white/80 bg-white/70 px-6 py-10 shadow-[0_30px_90px_rgba(90,59,231,0.12)] backdrop-blur-xl sm:px-10 lg:px-14 lg:py-12"
           >
             <div>
               <motion.div
@@ -162,7 +162,7 @@ function HeroSection() {
                 <span className="text-xs font-semibold text-[#4112d0]">Personalized AI Intelligence</span>
               </motion.div>
 
-              <h1 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-5xl md:text-6xl lg:text-7xl font-800 text-[#1c1a24] leading-[1.1] mb-6">
+              <h1 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-5xl md:text-6xl lg:text-7xl font-800 text-[#1c1a24] leading-[1.05] tracking-[-0.03em] mb-6">
                 Your Wellness.
                 <br />
                 <span className="bg-gradient-to-r from-[#4112d0] via-[#5a3be7] to-[#818cf8] bg-clip-text text-transparent">
@@ -170,8 +170,8 @@ function HeroSection() {
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl text-[#787587] leading-relaxed max-w-2xl mx-auto">
-                Get AI-powered wellness recommendations tailored to your age, skin type, hair type, and body goals. Track your progress free for 15 days.
+              <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#5f5b6f] md:text-xl">
+                Get AI-powered wellness recommendations tailored to your age, skin type, hair type, and body goals. Track your progress free for 21 days.
               </p>
             </div>
 
@@ -197,7 +197,7 @@ function HeroSection() {
             </div>
 
             <p className="text-sm text-[#787587] text-center">
-              ✨ Free 15-day tracking • No credit card required
+              ✨ Free 21-day tracking • No credit card required
             </p>
           </motion.div>
         </div>
@@ -247,7 +247,7 @@ function FeaturesSection() {
   ];
 
   return (
-    <section id="features" className="relative py-24 bg-white">
+    <section id="features" className="relative py-24 bg-white lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6">
         {/* Section Header */}
         <motion.div
@@ -257,10 +257,14 @@ function FeaturesSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-4xl md:text-5xl font-800 text-[#1c1a24] mb-4">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-4 py-2">
+            <Zap size={16} className="text-[#5a3be7]" />
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#4112d0]">Core Features</span>
+          </div>
+          <h2 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-4xl md:text-5xl font-800 text-[#1c1a24] mb-4 tracking-[-0.02em]">
             Personalized to You
           </h2>
-          <p className="text-lg text-[#787587] max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-lg text-[#787587]">
             Every recommendation is powered by AI that learns your unique profile.
           </p>
         </motion.div>
@@ -270,7 +274,7 @@ function FeaturesSection() {
           {features.map((feature, i) => (
             <motion.div
               key={i}
-              className={`group rounded-2xl border border-[#e9e5ff] bg-gradient-to-br ${feature.gradient} p-8 backdrop-blur-sm transition-all hover:shadow-[0_20px_60px_rgba(90,59,231,0.15)] hover:border-[#818cf8] cursor-pointer`}
+              className={`group rounded-[1.75rem] border border-[#e9e5ff] bg-gradient-to-br ${feature.gradient} p-7 shadow-[0_18px_60px_rgba(90,59,231,0.08)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_70px_rgba(90,59,231,0.15)] hover:border-[#818cf8] cursor-pointer`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -303,9 +307,9 @@ function WhyPromptPalSection() {
   ];
 
   return (
-    <section id="why" className="relative py-24 bg-gradient-to-b from-[#fcf8ff] to-white">
+    <section id="why" className="relative py-24 bg-gradient-to-b from-[#fcf8ff] to-white lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6">
-        <div className="grid gap-16 lg:grid-cols-2 items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] items-center rounded-[2.5rem] border border-[#e9e5ff] bg-white/80 p-8 shadow-[0_24px_80px_rgba(90,59,231,0.08)] backdrop-blur-md md:p-10 lg:p-12">
           {/* Left: Heading */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -313,7 +317,7 @@ function WhyPromptPalSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-5xl md:text-6xl font-800 text-[#1c1a24] leading-[1.2]">
+            <h2 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-5xl md:text-6xl font-800 text-[#1c1a24] leading-[1.1] tracking-[-0.03em]">
               Smart. Personalized.
               <br />
               AI-Powered Wellness.
@@ -328,7 +332,7 @@ function WhyPromptPalSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <p className="text-lg text-[#787587] leading-relaxed">
+            <p className="text-lg text-[#5f5b6f] leading-relaxed">
               Promptpal:Personalized Skin,Hair and Body Wellness combines advanced AI intelligence with personalized wellness systems to create adaptive daily routines specifically designed for your modern lifestyle. No generic advice. No one-size-fits-all solutions. Just intelligent, personalized wellness backed by real product recommendations.
             </p>
 
@@ -337,8 +341,8 @@ function WhyPromptPalSection() {
               {benefits.map((benefit, i) => (
                 <motion.div
                   key={i}
-                  className="rounded-2xl border border-[#e9e5ff] bg-gradient-to-br from-[#4112d0]/5 to-[#5a3be7]/5 p-6 hover:shadow-lg transition-all"
-                  whileHover={{ y: -4 }}
+                  className="rounded-[1.25rem] border border-[#e9e5ff] bg-gradient-to-br from-[#4112d0]/6 to-[#5a3be7]/6 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_45px_rgba(90,59,231,0.12)]"
+                  whileHover={{ y: -4, scale: 1.01 }}
                 >
                   <div className="text-3xl mb-3">{benefit.icon}</div>
                   <h4 style={{ fontFamily: "'Manrope', sans-serif" }} className="font-700 text-[#1c1a24] mb-2">{benefit.title}</h4>
@@ -371,13 +375,13 @@ function HowItWorksSection() {
     {
       number: '03',
       title: 'Track & Improve',
-      description: 'Follow your personalized plan for 15 days free. See real results with AI-powered progress tracking and smart reminders.',
+      description: 'Follow your personalized plan for 21 days free. See real results with AI-powered progress tracking and smart reminders.',
       icon: '✅',
     },
   ];
 
   return (
-    <section id="how" className="relative py-24 bg-white">
+    <section id="how" className="relative py-24 bg-white lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6">
         {/* Section Header */}
         <motion.div
@@ -419,7 +423,7 @@ function HowItWorksSection() {
               </motion.div>
 
               {/* Card */}
-              <div className="rounded-2xl border border-[#e9e5ff] bg-gradient-to-br from-white to-[#f7f1ff] p-8 pt-24 hover:shadow-lg transition-all">
+              <div className="rounded-[1.75rem] border border-[#e9e5ff] bg-gradient-to-br from-white to-[#f7f1ff] p-8 pt-24 shadow-[0_16px_50px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(90,59,231,0.12)]">
                 <span style={{ fontFamily: "'Manrope', sans-serif" }} className="text-sm font-700 text-[#4112d0]">{step.number}</span>
                 <h3 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-2xl font-700 text-[#1c1a24] mt-3 mb-3">
                   {step.title}
@@ -438,10 +442,97 @@ function HowItWorksSection() {
 
 
 
+// Future Scope Section
+function FutureScopeSection() {
+  const futureFeatures = [
+    {
+      icon: Brain,
+      title: 'AI Wellness Coach',
+      description: 'Personal AI coach that continuously adapts your wellness routine based on your habits and progress.',
+    },
+    {
+      icon: TrendingUp,
+      title: 'AI Progress Analysis',
+      description: 'Advanced AI insights to identify trends, improvements and wellness patterns over time.',
+    },
+    {
+      icon: UtensilsCrossed,
+      title: 'AI Meal Planner',
+      description: 'Personalized daily meal recommendations generated according to body goals, allergies and nutrition requirements.',
+    },
+    {
+      icon: Dumbbell,
+      title: 'AI Workout Planner',
+      description: 'AI-generated workout plans customized for fitness level, body goals and daily activity.',
+    },
+    {
+      icon: BellRing,
+      title: 'Smart AI Reminders',
+      description: 'Intelligent reminders for skincare, workouts, hydration, sleep and healthy routines.',
+    },
+    {
+      icon: BarChart3,
+      title: 'Premium Analytics Dashboard',
+      description: 'Comprehensive wellness analytics with long-term progress tracking and advanced health insights.',
+    },
+  ];
+
+  return (
+    <section className="relative py-24 bg-gradient-to-b from-white to-[#fcf8ff] lg:py-28">
+      <div className="mx-auto max-w-[1400px] px-6">
+        <motion.div
+          className="mb-14 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-4 py-2">
+            <Zap size={16} className="text-[#5a3be7]" />
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#4112d0]">Future Scope</span>
+          </div>
+          <h2 style={{ fontFamily: "'Manrope', sans-serif" }} className="text-4xl md:text-5xl font-800 text-[#1c1a24] mb-4">
+            Where Promptpal Is Headed
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg text-[#787587]">
+            A visionary roadmap of intelligent features designed to make wellness guidance even more adaptive, personal, and actionable.
+          </p>
+        </motion.div>
+
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {futureFeatures.map((feature, i) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div
+                key={feature.title}
+                className="group relative overflow-hidden rounded-[1.75rem] border border-[#e9e5ff] bg-white/80 p-8 shadow-[0_16px_50px_rgba(90,59,231,0.08)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#818cf8] hover:shadow-[0_24px_70px_rgba(90,59,231,0.16)]"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#4112d0] via-[#5a3be7] to-[#818cf8]" />
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#e9e5ff] bg-gradient-to-br from-[#4112d0]/10 to-[#5a3be7]/10 text-[#4112d0] transition-transform duration-300 group-hover:scale-110">
+                  <Icon size={20} />
+                </div>
+                <h3 style={{ fontFamily: "'Manrope', sans-serif" }} className="mb-3 text-xl font-700 text-[#1c1a24]">
+                  {feature.title}
+                </h3>
+                <p className="leading-relaxed text-[#787587]">{feature.description}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // CTA Section
 function CTASection() {
   return (
-    <section className="relative py-24 bg-white">
+    <section className="relative py-24 bg-white lg:py-28">
       {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full blur-3xl bg-gradient-to-r from-[#4112d0]/20 via-[#5a3be7]/15 to-transparent" />
@@ -450,7 +541,7 @@ function CTASection() {
 
       <div className="relative z-10 mx-auto max-w-[1200px] px-6">
         <motion.div
-          className="rounded-3xl border border-[#e9e5ff] bg-gradient-to-br from-[#4112d0]/10 via-[#5a3be7]/10 to-[#818cf8]/10 backdrop-blur-xl px-8 md:px-12 py-16 md:py-20 text-center"
+          className="rounded-[2rem] border border-[#e9e5ff] bg-gradient-to-br from-[#4112d0]/12 via-[#5a3be7]/10 to-[#818cf8]/12 px-8 py-16 text-center shadow-[0_24px_80px_rgba(90,59,231,0.10)] backdrop-blur-xl md:px-12 md:py-20"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
@@ -464,7 +555,7 @@ function CTASection() {
             </span>
           </h2>
           <p className="text-lg text-[#787587] max-w-2xl mx-auto mb-8">
-            Get AI-powered recommendations in minutes. Track free for 15 days. No credit card required.
+            Get AI-powered recommendations in minutes. Track free for 21 days. No credit card required.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -495,63 +586,14 @@ function CTASection() {
 // Footer Component
 function Footer() {
   return (
-    <footer className="border-t border-[#e9e5ff] bg-white py-12">
-      <div className="mx-auto max-w-[1400px] px-6">
-        <div className="grid gap-8 md:grid-cols-3 mb-8">
-          {/* Brand */}
-          <div>
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#4112d0] to-[#818cf8] p-1">
-                <img
-                  src="/promptpal_logo.png"
-                  alt="Promptpal logo"
-                  className="h-full w-full rounded object-contain"
-                  onError={(e) => { e.target.style.display = 'none'; }}
-                />
-              </div>
-              <span style={{ fontFamily: "'Manrope', sans-serif" }} className="font-700 text-[#4112d0] text-xs">Promptpal:<br/>Personalized</span>
-            </Link>
-            <p className="text-sm text-[#787587]">Personalized skin, hair & body wellness powered by AI.</p>
-          </div>
-
-          {/* Product */}
-          <div>
-            <h4 style={{ fontFamily: "'Manrope', sans-serif" }} className="font-700 text-[#1c1a24] mb-4">Product</h4>
-            <ul className="space-y-2">
-              {['Features', 'How It Works', 'Pricing', 'Security'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-[#787587] hover:text-[#4112d0] transition">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-
-
-          {/* Legal */}
-          <div>
-            <h4 style={{ fontFamily: "'Manrope', sans-serif" }} className="font-700 text-[#1c1a24] mb-4">Legal</h4>
-            <ul className="space-y-2">
-              {['Privacy', 'Terms', 'Cookies', 'License'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-[#787587] hover:text-[#4112d0] transition">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="border-t border-[#e9e5ff] pt-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm text-[#787587]">
-            © {new Date().getFullYear()} Promptpal:Personalized Skin,Hair and Body Wellness. All rights reserved.
-          </p>
-          
-        </div>
+    <footer className="border-t border-[#e9e5ff] bg-white py-10">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-center px-6">
+        <a
+          href="mailto:promptpalwellness@gmail.com"
+          className="rounded-full border border-[#e9e5ff] bg-[#faf8ff] px-5 py-2.5 text-sm font-medium text-[#4112d0] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#f1ecfa] hover:text-[#5a3be7]"
+        >
+          promptpalwellness@gmail.com
+        </a>
       </div>
     </footer>
   );
@@ -568,6 +610,7 @@ export default function LandingPage() {
       <FeaturesSection />
       <WhyPromptPalSection />
       <HowItWorksSection />
+      <FutureScopeSection />
       <CTASection />
       <Footer />
     </div>

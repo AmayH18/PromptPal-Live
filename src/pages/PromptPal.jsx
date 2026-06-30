@@ -433,7 +433,7 @@ export default function PromptPal() {
         />
 
         {/* ── Content ── */}
-        <div className="relative z-10 min-h-screen px-4 py-10 sm:px-8 sm:py-14 lg:px-12">
+        <div className="relative z-10 min-h-screen px-4 py-6 sm:px-8 sm:py-10 lg:px-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-10 lg:gap-12">
 
             <div className="fade-up flex justify-start" style={{ animationDelay: "0.01s" }}>
@@ -614,7 +614,7 @@ export default function PromptPal() {
                 <button
                   onClick={generateAdvice}
                   disabled={isInvalidSelection || loading}
-                  className="inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-white/[0.16] bg-white/[0.09] px-5 py-2.75 text-[13px] font-semibold text-white transition duration-300 hover:border-white/30 hover:bg-white/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
+                  className="inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-white/[0.16] bg-white/[0.09] px-4 py-2.5 text-[13px] font-semibold text-white transition duration-300 hover:border-white/30 hover:bg-white/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
                 >
                   {loading ? (
                     <>

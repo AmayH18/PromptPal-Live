@@ -165,7 +165,7 @@ export default function ProfilePage() {
                   Manage your wellness details and preferences
                 </p>
               </div>
-              <div className="flex flex-wrap justify-end gap-3">
+              <div className="flex flex-wrap justify-end gap-2 sm:gap-3">
                 <button
                   onClick={() => { clearProfileCache(); navigate("/edit-profile"); }}
                   className="rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
@@ -193,7 +193,7 @@ export default function ProfilePage() {
                     localStorage.removeItem("promptpal_userId");
                     navigate("/login");
                   }}
-                  className="rounded-full border border-rose-400/30 bg-rose-500/10 px-4 py-2 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/20"
+                  className="rounded-full border border-rose-400/30 bg-rose-500/10 px-3 py-2 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/20 sm:px-4"
                 >
                   Logout
                 </button>
