@@ -29,6 +29,50 @@ const HAIR_CONCERN_LABELS = {
   DRY_SCALP: "Dry Scalp",
 };
 
+const HAIR_GOAL_OPTIONS = [
+  "HAIR_GROWTH",
+  "HAIR_THICKNESS",
+  "HAIR_FALL",
+  "HAIR_DANDRUFF",
+  "HAIR_FRIZZ",
+  "HAIR_SHINE",
+  "HAIR_REPAIR",
+];
+
+const HAIR_GOAL_LABELS = {
+  HAIR_GROWTH: "Hair Growth",
+  HAIR_THICKNESS: "Hair Thickness",
+  HAIR_FALL: "Hair Fall Control",
+  HAIR_DANDRUFF: "Dandruff Control",
+  HAIR_FRIZZ: "Frizz Control",
+  HAIR_SHINE: "Hair Shine",
+  HAIR_REPAIR: "Hair Repair",
+};
+
+const ALLERGY_OPTIONS = [
+  "MILK",
+  "EGGS",
+  "GLUTEN",
+  "NUTS",
+  "SEAFOOD",
+  "SOY",
+  "DUST",
+  "POLLEN",
+  "NONE",
+];
+
+const ALLERGY_LABELS = {
+  MILK: "Milk",
+  EGGS: "Eggs",
+  GLUTEN: "Gluten",
+  NUTS: "Nuts",
+  SEAFOOD: "Seafood",
+  SOY: "Soy",
+  DUST: "Dust",
+  POLLEN: "Pollen",
+  NONE: "None",
+};
+
 const SKIN_CONCERN_OPTIONS = [
   "ACNE",
   "ACNE_MARKS",
@@ -55,6 +99,11 @@ function parseConcerns(value) {
   return Array.from(new Set((value || "").split(",").map((s) => s.trim()).filter(Boolean)));
 }
 
+function parseAllergies(value) {
+  const parsed = Array.from(new Set((value || "").split(",").map((s) => s.trim().toUpperCase()).filter(Boolean)));
+  return parsed.includes("NONE") ? ["NONE"] : parsed;
+}
+
 function Section({ title, icon, children }) {
   return (
     <div className="rounded-2xl border border-white/10 p-5 backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.04)" }}>
@@ -78,7 +127,7 @@ export default function EditProfilePage() {
   const [skinConcerns, setSkinConcerns] = useState([]);
   const [hairType, setHairType] = useState("");
   const [hairConcerns, setHairConcerns] = useState([]);
-  const [hairGoals, setHairGoals] = useState("");
+  const [hairGoals, setHairGoals] = useState([]);
   const [bodyGoal, setBodyGoal] = useState("");
   const [skinConcernLevel, setSkinConcernLevel] = useState(5);
   const [hairConcernLevel, setHairConcernLevel] = useState(5);
@@ -90,7 +139,9 @@ export default function EditProfilePage() {
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
   const hairConcernsText = hairConcerns.join(", ");
+  const hairGoalsText = hairGoals.join(", ");
   const skinConcernsText = skinConcerns.join(", ");
+  const selectedAllergies = parseAllergies(allergies);
 
   const token = localStorage.getItem("promptpal_token");
 
@@ -121,7 +172,13 @@ export default function EditProfilePage() {
         } else {
           setHairConcerns([]);
         }
-        setHairGoals(u.hairGoals || "");
+        if (Array.isArray(u.hairGoals)) {
+          setHairGoals((u.hairGoals || []).filter(Boolean));
+        } else if (typeof u.hairGoals === "string") {
+          setHairGoals(parseConcerns(u.hairGoals));
+        } else {
+          setHairGoals([]);
+        }
         setBodyGoal(u.bodyGoal || "");
         setSkinConcernLevel(u.skinConcernLevel ?? 5);
         setHairConcernLevel(u.hairConcernLevel ?? 5);
@@ -141,6 +198,7 @@ export default function EditProfilePage() {
     e.preventDefault();
     setMessage("");
     if (!phone || phone.length < 10) return setMessage("Enter a valid phone number.");
+    if (!hairGoals.length) return setMessage("Select at least one hair goal.");
     if (age < 10 || age > 100) return setMessage("Enter a valid age (10–100).");
     if (height < 50 || height > 250) return setMessage("Enter valid height (50–250 cm).");
     if (weight < 20 || weight > 300) return setMessage("Enter valid weight (20–300 kg).");
@@ -151,9 +209,12 @@ export default function EditProfilePage() {
     if (exerciseScore < 1 || exerciseScore > 4) return setMessage("Select valid exercise frequency.");
 
     setSaving(true);
+    setMessage("⏳ Saving...");
     try {
       const hairConcernsPayload = hairConcerns.join(",");
       const skinConcernsPayload = skinConcerns.join(",");
+      const hairGoalsPayload = hairGoals.join(",");
+      const allergiesPayload = selectedAllergies.join(",") || "NONE";
       const userId = localStorage.getItem("promptpal_userId");
 
 await API.put(
@@ -167,19 +228,19 @@ await API.put(
           skinConcerns: skinConcernsPayload,
           hairType,
           hairConcerns: hairConcernsPayload,
-          hairGoals,
+          hairGoals: hairGoalsPayload,
           bodyGoal,
           skinConcernLevel,
           hairConcernLevel,
           sleepHours,
           dietScore,
           exerciseScore,
-          allergies,
+          allergies: allergiesPayload,
           dailyRoutine,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setMessage("✅ Profile saved successfully!");
+      setMessage("✓ Profile Updated Successfully");
     } catch (err) {
       setMessage("❌ Failed to update profile.");
     } finally {
@@ -333,16 +394,37 @@ await API.put(
                     </div>
                     <div>
                       <label className={labelCls}>Hair Goal *</label>
-                      <select className={selectCls} value={hairGoals} onChange={(e) => setHairGoals(e.target.value)} required>
-                        <option value="">Select Hair Goal</option>
-                        <option value="HAIR_GROWTH">Hair Growth</option>
-                        <option value="HAIR_THICKNESS">Hair Thickness</option>
-                        <option value="HAIR_FALL">Hair Fall Control</option>
-                        <option value="HAIR_DANDRUFF">Dandruff Control</option>
-                        <option value="HAIR_FRIZZ">Frizz Control</option>
-                        <option value="HAIR_SHINE">Hair Shine</option>
-                        <option value="HAIR_REPAIR">Hair Repair</option>
-                      </select>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {HAIR_GOAL_OPTIONS.map((goal) => {
+                          const selected = hairGoals.includes(goal);
+                          return (
+                            <button
+                              key={goal}
+                              type="button"
+                              onClick={() =>
+                                setHairGoals((prev) =>
+                                  prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
+                                )
+                              }
+                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                                selected
+                                  ? "border-cyan-400 bg-cyan-400/20 text-white"
+                                  : "border-white/10 bg-transparent text-slate-300 hover:bg-white/4"
+                              }`}
+                            >
+                              {HAIR_GOAL_LABELS[goal]}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      <input
+                        className={inputCls}
+                        type="text"
+                        placeholder="Comma separated goals"
+                        value={hairGoalsText}
+                        onChange={(e) => setHairGoals(parseConcerns(e.target.value))}
+                      />
                     </div>
                     <div>
                       <label className={labelCls}>Hair Concerns (optional)</label>
@@ -455,13 +537,36 @@ await API.put(
                   <div className="space-y-4">
                     <div>
                       <label className={labelCls}>Allergies (optional)</label>
-                      <textarea
-                        className={inputCls}
-                        rows={2}
-                        placeholder="Any known allergies or sensitivities..."
-                        value={allergies}
-                        onChange={(e) => setAllergies(e.target.value)}
-                      />
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {ALLERGY_OPTIONS.map((allergy) => {
+                          const selected = selectedAllergies.includes(allergy);
+                          return (
+                            <button
+                              key={allergy}
+                              type="button"
+                              onClick={() => {
+                                const current = parseAllergies(allergies);
+                                if (allergy === "NONE") {
+                                  setAllergies(current.includes("NONE") ? "" : "NONE");
+                                  return;
+                                }
+                                const updated = current.includes("NONE") ? [] : current;
+                                const next = updated.includes(allergy)
+                                  ? updated.filter((item) => item !== allergy)
+                                  : [...updated, allergy];
+                                setAllergies(next.length ? next.join(",") : "NONE");
+                              }}
+                              className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+                                selected
+                                  ? "border-cyan-400 bg-cyan-400/20 text-white"
+                                  : "border-white/10 bg-transparent text-slate-300 hover:bg-white/4"
+                              }`}
+                            >
+                              {ALLERGY_LABELS[allergy]}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                     <div>
                       <div className="flex items-center justify-between mb-1.5">

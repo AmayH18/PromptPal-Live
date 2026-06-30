@@ -505,12 +505,21 @@ export default function ChooseAdvicePage() {
                     className="inline-flex items-center gap-2 rounded-full border border-white/[0.16] bg-white/[0.09] px-5 py-2.5 text-[13px] font-semibold text-white transition duration-300 hover:border-white/30 hover:bg-white/[0.15] disabled:cursor-not-allowed disabled:opacity-45"
                   >
                     {generatingType ? (
-                      <>
-                        <Loader2 size={14} className="animate-spin" />
-                        Generating…
-                      </>
+                      <div className="flex flex-col items-start text-left">
+                        <div className="flex items-center gap-2">
+                          <Loader2 size={14} className="animate-spin" />
+                          <span className="text-[12.5px] font-semibold">🧠 PromptPal AI is analyzing...</span>
+                        </div>
+                        <div className="mt-1 flex flex-wrap gap-2 text-[10px] text-slate-300/75">
+                          <span>✔ Skin profile</span>
+                          <span>✔ Hair profile</span>
+                          <span>✔ Lifestyle</span>
+                          <span>✔ Wellness goals</span>
+                        </div>
+                        <span className="mt-1 text-[10px] text-cyan-200/90">Creating personalized recommendations...</span>
+                      </div>
                     ) : (
-                      "Generate Advice"
+                      "Generate Recommendation"
                     )}
                   </button>
                 </div>
@@ -576,17 +585,16 @@ export default function ChooseAdvicePage() {
               {/* Section divider */}
               <div className="mb-6 flex items-center gap-3">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.09] to-transparent" />
-                <span
-                  style={{
-                    fontSize: 10.5,
-                    fontWeight: 700,
-                    color: "rgba(148,163,184,0.48)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.18em",
-                  }}
-                >
-                  Your History
-                </span>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  {['Today\'s Recommendation', 'Yesterday', '3 Days Ago', 'Last Week'].map((label) => (
+                    <span
+                      key={label}
+                      className="rounded-full border border-white/[0.10] bg-white/[0.05] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200/70"
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
                 {!loadingHistory && history.length > 0 && (
                   <span className="rounded-full border border-white/[0.10] bg-white/[0.05] px-2.5 py-0.5 text-[11px] font-semibold text-slate-200/70">
                     {history.length} {history.length === 1 ? "session" : "sessions"}
