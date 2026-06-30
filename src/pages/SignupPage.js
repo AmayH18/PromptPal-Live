@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
@@ -14,11 +15,12 @@ export default function SignupPage() {
       const res = await API.post("/api/auth/signup", {
         username,
         email,
+        phone,
         password,
       });
       setMessage("✅ Signup successful! Please login.");
     } catch (err) {
-      setMessage("❌ Signup failed. Try again.");
+      setMessage(err.response?.data || "❌ Signup failed. Please try again.");
     }
   };
 
@@ -177,6 +179,24 @@ export default function SignupPage() {
                       placeholder="you@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      className="block mb-1.5 uppercase tracking-wider text-[#787587]"
+                      style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.06em' }}
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      className="w-full h-12 rounded-xl border border-[#c9c4d8] bg-[#f7f1ff] px-4 text-[#1c1a24] outline-none transition placeholder:text-[#c9c4d8] focus:border-[#5a3be7] focus:ring-2 focus:ring-[#5a3be7]/20 focus:bg-white"
+                      style={{ fontSize: 15 }}
+                      type="tel"
+                      placeholder="9876543210"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       required
                     />
                   </div>
