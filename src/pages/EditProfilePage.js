@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../api";
 import { useNavigate } from "react-router-dom";
 
 const inputCls = "w-full rounded-xl border border-white/35 bg-white/95 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-cyan-400";
@@ -97,7 +97,7 @@ export default function EditProfilePage() {
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/auth/profile", {
+        const res = await API.get("/api/auth/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const u = res.data;
@@ -156,8 +156,8 @@ export default function EditProfilePage() {
       const skinConcernsPayload = skinConcerns.join(",");
       const userId = localStorage.getItem("promptpal_userId");
 
-await axios.put(
-  `http://localhost:8080/api/profile/${userId}`,
+await API.put(
+  `/api/profile/${userId}`,
         {
           phone,
           age,

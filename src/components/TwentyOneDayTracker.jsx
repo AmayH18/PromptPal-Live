@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../api";
 
 // ── Parse plain-text routine into sections with steps ─────────────────────────
 function parseRoutine(text) {
@@ -300,17 +301,14 @@ export default function TwentyOneDayTracker({ resultId, adviceType, token }) {
   const navigate = useNavigate();
 
   const HEADERS = { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
-  const BASE = "http://localhost:8080";
 
   const loadStatus = useCallback(async () => {
     try {
-      const res = await fetch(
-        `${BASE}/api/tracking/status?adviceType=${adviceType}`,
-        {
-          headers: HEADERS,
-        }
-      );
-      const data = await res.json();
+      const res = await API.get("/api/tracking/status", {
+        headers: HEADERS,
+        params: { adviceType },
+      });
+      const data = res.data;
       setStatus(data.hasActiveSession ? data : false);
     } catch {
       setStatus(false);
@@ -369,14 +367,15 @@ export default function TwentyOneDayTracker({ resultId, adviceType, token }) {
     const cur = status.days?.[status.days.length - 1];
     const steps = getCompletedTexts(cur.routineText);
     try {
-      await fetch(`${BASE}/api/tracking/save-steps`, {
-        method: "POST", headers: HEADERS,
-        body: JSON.stringify({
+      await API.post(
+        "/api/tracking/save-steps",
+        {
           dayNumber: status.currentDayNumber,
           adviceType,
           completedSteps: steps,
-        }),
-      });
+        },
+        { headers: HEADERS }
+      );
     } catch {}
   };
 
@@ -384,14 +383,15 @@ export default function TwentyOneDayTracker({ resultId, adviceType, token }) {
     if (!resultId) { setError("No result ID. Please generate advice first."); return; }
     setGenerating(true); setError("");
     try {
-      const res = await fetch(`${BASE}/api/tracking/start`, {
-        method: "POST", headers: HEADERS,
-        body: JSON.stringify({
+      const res = await API.post(
+        "/api/tracking/start",
+        {
           userResultId: resultId,
           adviceType,
-        }),
-      });
-      const data = await res.json();
+        },
+        { headers: HEADERS }
+      );
+      const data = res.data;
       if (data.hasActiveSession) setStatus(data);
       else setError("Could not start tracking. Please try again.");
     } catch { setError("Failed to start tracking."); }
@@ -404,14 +404,15 @@ export default function TwentyOneDayTracker({ resultId, adviceType, token }) {
     const cur = status.days?.[status.days.length - 1];
     const completedSteps = getCompletedTexts(cur?.routineText || ""); // [] if none checked
     try {
-      const res = await fetch(`${BASE}/api/tracking/next-day`, {
-        method: "POST", headers: HEADERS,
-        body: JSON.stringify({
+      const res = await API.post(
+        "/api/tracking/next-day",
+        {
           adviceType,
           completedSteps,
-        }), // always sent, even if []
-      });
-      const data = await res.json();
+        },
+        { headers: HEADERS }
+      );
+      const data = res.data;
       if (data.error) { setError(data.error); return; }
       setCheckedSteps({});
       setShowReview(false);

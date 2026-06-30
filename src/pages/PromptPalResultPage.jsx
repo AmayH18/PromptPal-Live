@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import WellnessResultRenderer from "../components/WellnessResultRenderer";
 import TwentyOneDayTracker from "../components/TwentyOneDayTracker";
+import API from "../api";
 /* ─────────────────────────────────────────
    UTILITY: extract ASIN from Amazon URL
 ───────────────────────────────────────── */
@@ -503,11 +504,10 @@ export default function PromptPalResultPage() {
 
     const fetchLatest = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/wellness/history", {
+        const res = await API.get("/api/wellness/history", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        if (!res.ok) throw new Error("Failed to fetch history");
-        const data = await res.json();
+        const data = res.data;
         if (Array.isArray(data) && data.length > 0) {
           const latest = data[0]; // data[0] is most recent (DESC order)
           setAdvice(latest.aiResponse || "");

@@ -99,14 +99,14 @@ export default function DashboardPage() {
     setGenerating(adviceType);
     setMessage("");
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/wellness/generate?adviceType=${adviceType}`,
+      const response = await API.post(
+        `/api/wellness/generate?adviceType=${adviceType}`,
+        {},
         {
-          method: "POST",
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         }
       );
-      const data = await response.json();
+      const data = response.data;
       navigate("/promptpal/result", {
         state: {
           advice: data?.aiResponse || "No advice generated.",

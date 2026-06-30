@@ -230,15 +230,14 @@ export default function PromptPal() {
       if (!userId || !token) return;
 
       try {
-        const response = await fetch("http://localhost:8080/api/tracking/active-journeys", {
-          method: "GET",
+        const response = await API.get("/api/tracking/active-journeys", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         });
 
-        const data = await response.json();
+        const data = response.data;
         const journeys = Array.isArray(data)
           ? data
           : Array.isArray(data?.activeJourneys)
@@ -272,10 +271,10 @@ export default function PromptPal() {
     try {
       const adviceType = selectedType;
 
-      const response = await fetch(
-        `http://localhost:8080/api/wellness/generate?adviceType=${adviceType}`,
+      const response = await API.post(
+        `/api/wellness/generate?adviceType=${adviceType}`,
+        {},
         {
-          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -283,7 +282,7 @@ export default function PromptPal() {
         }
       );
 
-      const data = await response.json();
+      const data = response.data;
 
       navigate("/promptpal/result", {
         state: {

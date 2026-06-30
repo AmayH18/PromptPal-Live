@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import API from "../api";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/forgot-password", {
+      const res = await API.post("/api/auth/forgot-password", {
         email: email,
       });
 
@@ -30,8 +30,8 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        `http://localhost:8080/api/auth/reset-password?email=${email}&otp=${otp}&newPassword=${newPassword}`
+      const res = await API.post(
+        `/api/auth/reset-password?email=${email}&otp=${otp}&newPassword=${newPassword}`
       );
       setMessage(res.data);
       setStep(3);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Sparkles, Feather, Dumbbell, Crown, ArrowLeft, ChevronRight, CheckCircle2, Loader2 } from "lucide-react";
 import WellnessResultRenderer from "../components/WellnessResultRenderer";
+import API from "../api";
 
 const ADVICE_TYPES = [
   {
@@ -291,12 +292,10 @@ export default function ChooseAdvicePage() {
     if (!token) return;
     setLoadingHistory(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/wellness/history`, {
-        method: "GET",
+      const response = await API.get("/api/wellness/history", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!response.ok) throw new Error("Failed to fetch history.");
-      const data = await response.json();
+      const data = response.data;
       setHistory(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
@@ -318,17 +317,17 @@ export default function ChooseAdvicePage() {
     setGeneratingType(selectedType);
     setError("");
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/wellness/generate?adviceType=${selectedType}`,
+      const response = await API.post(
+        `/api/wellness/generate?adviceType=${selectedType}`,
+        {},
         {
-          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
       );
-      const data = await response.json();
+      const data = response.data;
       navigate("/promptpal/result", {
         state: {
           advice: data?.aiResponse || "No advice generated.",
